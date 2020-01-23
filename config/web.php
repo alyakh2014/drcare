@@ -45,15 +45,22 @@ $config = [
         ],
         'db' => $db,
        
-    'urlManager' => [
-    'enablePrettyUrl' => true,
-    'showScriptName' => false,
-    'rules' => [
-        '' => 'site/index',                                
-        '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+        'urlManager' => [
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+        'rules' => [
+            '' => 'site/index',
+            '<action>'=>'site/<action>',
+            '<controller:\w+>/<action:\w+>/' => '<action>',
+                ],
             ],
-        ],
-        
+/*        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<action:(contacts|test)>'=>'site/<action>',
+            ],
+        ],*/
     ],
     'params' => $params,
 ];
