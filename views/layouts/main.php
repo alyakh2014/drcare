@@ -52,13 +52,15 @@ AppAsset::register($this);
                 'label' => 'Главная ',
                 'url' => Yii::$app->homeUrl,
             ],
-            'itemTemplate' => "<li> {link}/ </li>\n"
+            'itemTemplate' => "<li> {link}/ </li>\n",
+            'options' => ['class' => 'container breadcrumb', 'style' => 'background:none']
          ]) ?>
     <?endif;?>
 </header>
-
-<?= Alert::widget() ?>
-<?= $content ?>
+<div class="container">
+        <?= Alert::widget() ?>
+        <?= $content ?>
+</div>
 <div class="subscribe-banner">
     <div class="container">
         <div class="row">

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use yii\httpclient\Client;;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -134,6 +135,16 @@ class SiteController extends Controller
 
     public function actionNews()
     {
-        return $this->render('news');
+       $client = new Client();
+       $data = [];
+/*       $response = $client->createRequest()
+            ->setMethod('post')
+            ->setFormat(Client::FORMAT_JSON)
+            ->addHeaders(['Content-Type'=> 'application/json'])
+            ->setUrl(\Yii::$app->params['api']['host'])
+            ->send($data);
+
+       $res = json_decode($response->getContent(), true);*/
+       return $this->render('news', compact('data'));
     }
 }

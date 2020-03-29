@@ -54,13 +54,14 @@ $config = [
             '<controller:\w+>/<action:\w+>/' => '<action>',
                 ],
             ],
-/*        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                '<action:(contacts|test)>'=>'site/<action>',
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['js/jquery.js'] // тут путь до Вашего экземпляра jquery
+                ],
             ],
-        ],*/
+        ]
     ],
     'params' => $params,
 ];
