@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Services;
+use app\models\ServicesCategory;
+use yii\data\ArrayDataProvider;
 use yii\httpclient\Client;;
 use Yii;
 use yii\filters\AccessControl;
@@ -33,7 +36,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['post', 'get'],
                 ],
             ],
         ];
@@ -130,7 +133,18 @@ class SiteController extends Controller
 
     public function actionServices()
     {
-        return $this->render('services');
+
+        $provider = Services::find()->with('services_category')->all();
+        $services = new ArrayDataProvider([
+            'allModels' => $provider,
+            'pagination' => [
+                'pageSize' => 6,
+            ],
+            'sort' => [
+                'attributes' => ['id', 'name'],
+            ],
+        ]);
+        return $this->render('services', compact('services'));
     }
 
     public function actionNews()
@@ -146,5 +160,9 @@ class SiteController extends Controller
 
        $res = json_decode($response->getContent(), true);*/
        return $this->render('news', compact('data'));
+    }
+
+    public function actionSubscribe(){
+        return "Yes";
     }
 }

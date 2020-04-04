@@ -6,11 +6,17 @@ use yii\helpers\Url;
 <nav class="site-navigation d-flex justify-content-end align-items-center">
     <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
         <li class="current-menu-item"><a href="<?=Url::home()?>">Главная</a></li>
-        <li><a href="<?=Url::toRoute('site/about')?>">О нас</a></li>
-        <li><a href="<?=Url::toRoute('site/services')?>">Услуги</a></li>
-        <li><a href="<?=Url::toRoute('site/news')?>">Новости</a></li>
-        <li><a href="<?=Url::toRoute('site/contacts')?>">Контакты</a></li>
-
+        <li><a href="<?=Url::toRoute('/site/about')?>">О нас</a></li>
+        <li><a href="<?=Url::toRoute('/site/services')?>">Услуги</a></li>
+        <li><a href="<?=Url::toRoute('/site/news')?>">Новости</a></li>
+        <li><a href="<?=Url::toRoute('/site/contacts')?>">Контакты</a></li>
+        <li>
+        <?if(Yii::$app->user->isGuest):?>
+            <a href="<?=Url::toRoute('/admin')?>">Вход</a>
+        <?else:?>
+            <a href="<?=Url::toRoute('/logout')?>"><?=Yii::$app->user->identity['username']?>(Выход)</a>
+        <?endif;?>
+        </li>
         <li class="call-btn button gradient-bg mt-3 mt-md-0">
             <a class="d-flex justify-content-center align-items-center" href="#"><?=Html::img('@web/images/emergency-call.png')?> +7(999)888-77-66</a>
         </li>

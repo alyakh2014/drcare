@@ -1563,3 +1563,21 @@ ul.tabs-nav .tab-nav.active {
 .foot-links ul li a {
     color: #828282;
 }
+
+#services-list .services-list__item{
+    text-align: center!important;
+    padding:1px;
+    border: 1px solid white;
+    background: #f0f4f8;
+}
+
+#services-list .services-list__item h4{
+     color:#18a3eb;
+     height: 40px;
+    margin: 5px 0 0;
+}
+
+#services-list .services-list__item .services-list__item-img-category{
+    font-size: 12px;
+    height: 40px;
+}
