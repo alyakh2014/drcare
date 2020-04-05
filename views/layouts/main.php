@@ -64,7 +64,8 @@ SiteAsset::register($this);
         <?= $content ?>
 </div>
 <?Pjax::begin([
-    'timeout'=>3000
+    'timeout'=>3000,
+    'enablePushState'=> false
 ]);?>
 <?=SubscribeWidget::widget();?>
 <?Pjax::end();?>

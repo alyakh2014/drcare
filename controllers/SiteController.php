@@ -4,10 +4,14 @@ namespace app\controllers;
 
 use app\models\Services;
 use app\models\ServicesCategory;
+use app\models\SubscribeForm;
+use app\widgets\SubscribeWidget;
 use yii\data\ArrayDataProvider;
+use yii\db\Exception;
 use yii\httpclient\Client;;
 use Yii;
 use yii\filters\AccessControl;
+use yii\log\Logger;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -144,7 +148,9 @@ class SiteController extends Controller
                 'attributes' => ['id', 'name'],
             ],
         ]);
-        return $this->render('services', compact('services'));
+        //GetCategories
+        $categories = ServicesCategory::find()->all();
+        return $this->render('services', compact('services', 'categories'));
     }
 
     public function actionNews()
@@ -163,6 +169,44 @@ class SiteController extends Controller
     }
 
     public function actionSubscribe(){
-        return "Yes";
+
+        $model = new SubscribeForm();
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())){
+            $emaildb = Yii::$app->db->createCommand('SELECT id, active FROM {{subscribe}} WHERE email=:email')
+                ->bindValue(':email', $model->email)
+                ->queryOne();
+            if(!$emaildb){
+                try{
+                    Yii::$app->db->createCommand()->insert('subscribe', [
+                        'email' => $model->email,
+                        'active' => true,
+                    ])->execute();
+                    $result = "Теперь Вы будете знать наши последние новости!";
+                }catch (Exception $e){
+                    $result = $this->logError($e->getMessage());
+                }
+            }elseif($emaildb && $emaildb['active']){
+                $result = 'Вы уже подписаны на рассылку';
+            }elseif($emaildb && !$emaildb['active']){
+                try{
+                    Yii::$app->db->createCommand()->update('subscribe', ['active' => true], 'id ='.$emaildb['id'])->execute();
+                    $result = "Подписка удачно была активирована снова!";
+                }catch(Exception $e){
+                    $result = $this->logError($e->getMessage());
+                }
+            }
+        }
+
+        return SubscribeWidget::widget(['result'=>$result]);
+    }
+
+    /**
+     * @param $msg
+     * @return string
+     */
+    private function logError($msg):string
+    {
+        Yii::getLogger()->log($msg, Logger::LEVEL_ERROR);
+        return 'Произошла ошибка. Повторите попытку позже';
     }
 }

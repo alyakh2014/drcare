@@ -12,8 +12,12 @@
                     'action'=>'/subscribe',
                     'options' => ['class' => 'form-horizontal', 'data' => ['pjax' => true]],
                 ]);
-                echo $form->field($model, 'email')->input('email', ['placeholder'=> 'Введите email адрес']);
-                echo Html::submitButton('Подписаться', ['class' => 'button gradient-bg']);
+                if($result){
+                    echo $form->field($model, 'email')->input('readonly', ['placeholder'=> $result]);
+                }else{
+                    echo $form->field($model, 'email')->input('email', ['placeholder'=> 'Введите email адрес']);
+                    echo Html::submitButton('Подписаться', ['class' => 'button gradient-bg']);
+                }
                 ActiveForm::end();
                 ?>
             </div>

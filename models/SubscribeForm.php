@@ -13,7 +13,8 @@ class SubscribeForm extends ActiveRecord
     {
         return [
           ['email', 'required', 'message'=>'Поле обязательно к заполнению'],
-          ['email', 'email']
+          ['email', 'email'],
+          ['email', 'trim']
         ];
     }
 

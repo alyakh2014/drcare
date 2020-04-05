@@ -1581,3 +1581,14 @@ ul.tabs-nav .tab-nav.active {
     font-size: 12px;
     height: 40px;
 }
+
+.services-list__categories{
+    align-items: center;
+    justify-content: center;
+}
+
+
+.services-list__categories li{
+    padding: 10px!important;
+    font-size: 15px;
+}

@@ -9,6 +9,8 @@ use yii\base\Widget;
 
 class SubscribeWidget extends Widget
 {
+    public $result = null;
+
     public function init()
     {
         parent::init();
@@ -17,7 +19,8 @@ class SubscribeWidget extends Widget
     public function run()
     {
         $model = new SubscribeForm();
-        return $this->render('subscribe', compact('model'));
+        $result = $this->result;
+        return $this->render('subscribe', compact('model', 'result'));
     }
 
 }

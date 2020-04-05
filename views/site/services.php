@@ -214,8 +214,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="container">
     <div class="row">
         <?Pjax::begin(['timeout'=>3000])?>
-        <?
-            echo ListView::widget([
+        <ul class="tabs-nav d-flex flex-wrap services-list__categories">
+            <?foreach($categories as $category):?>
+                <li class="tab-nav d-flex justify-content-center align-items-center"><?=strtolower($category['name'])?></li>
+            <?endforeach;?>
+        </ul>
+        <?echo ListView::widget([
                 'dataProvider' => $services,
                 'itemView' => 'service',
                 'options' => [
