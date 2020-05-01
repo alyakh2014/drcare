@@ -2,9 +2,10 @@
 
 namespace app\controllers;
 
-use app\models\Services;
-use app\models\ServicesCategory;
+
+use app\modules\admin\models\ServicesCategory;
 use app\models\SubscribeForm;
+use app\modules\admin\models\Services;
 use app\widgets\SubscribeWidget;
 use yii\data\ArrayDataProvider;
 use yii\db\Exception;

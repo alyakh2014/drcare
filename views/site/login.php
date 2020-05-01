@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>Пожалуйста, заполните следующие поля:</p>
-
+<?//= Yii::$app->security->generatePasswordHash('admin')?>
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',

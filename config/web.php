@@ -14,7 +14,7 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
-            'layout'=> 'admin'
+            'layout'=> 'main'
         ],
     ],
     'components' => [
@@ -35,10 +35,15 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'server195.hosting.reg.ru',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+                'username' => 'info@gift.all2you.ru',
+                'password' => 'sophia1953',
+                'port' => '465', // Port 25 is a very common port too
+                'encryption' => 'ssl', // It is often used, check your provider or mail server specs
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -51,16 +56,20 @@ $config = [
         ],
 
         'db' => $db,
-       
+        'keyStorage' => [
+            'class' => 'components\keyStorage\KeyStorage',
+        ],
         'urlManager' => [
-        'enablePrettyUrl' => true,
-        'showScriptName' => false,
-        'rules' => [
-            'admin'=>'admin/default/index',
-            '' => 'site/index',
-            '<action>'=>'site/<action>',
-            '<controller:\w+>/<action:\w+>' => '<action>',
-                ],
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '' => 'site/index',
+                //todo
+                'admin' => 'admin/',
+                '<action>'=>'site/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
+                    ],
             ],
         'assetManager' => [
             'bundles' => [

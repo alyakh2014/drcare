@@ -14,7 +14,7 @@ class ContactForm extends Model
     public $email;
     public $subject;
     public $body;
-  //  public $verifyCode;
+    public $verifyCode;
     public $agreement = true;
 
 
@@ -25,12 +25,12 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body', 'agreement'], 'required'],
+            [['name', 'email', 'subject', 'body', 'agreement'], 'required', 'message'=>'Значение поля "{attribute}" не может быть пустым'],
             // email has to be a valid email address
-            ['email', 'email'],
+            ['email', 'email', 'message'=>'Не верный формат email'],
             ['agreement', 'boolean'],
             // verifyCode needs to be entered correctly
-            //['verifyCode', 'captcha'],
+            ['verifyCode', 'captcha', 'message'=>'Вы ввели не верный код'],
         ];
     }
 
@@ -40,7 +40,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            //'verifyCode' => 'Verification Code',
+            'verifyCode' => 'Введите код с картинки',
+            'name' => 'Имя',
+            'subject' => 'Тема сообщения',
+            'body' => 'Сообщение',
+            'agreement' => 'Соглашение'
         ];
     }
 

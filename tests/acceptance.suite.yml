@@ -1,0 +1,16 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - PhpBrowser
+#        - Webhelper
+#        - WebDriver:
+#            url: http://gift.all2you.ru/
+#            browser: firefox
+#            host: chrome
+        - Yii2:
+            part: orm
+            entryScript: index-test.php
+            cleanup: false
+    config:
+        PhpBrowser:
+            url: 'http://gift.all2you.ru/'
