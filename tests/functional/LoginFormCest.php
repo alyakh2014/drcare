@@ -52,7 +52,7 @@ class LoginFormCest
             'LoginForm[username]' => 'demo',
             'LoginForm[password]' => 'demo',
         ]);
-        
+
         $I->dontSeeElement('form#login-form');
     }
 }

@@ -22,6 +22,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
+        //Do not use
         //return static::findOne(['access_token' => $token]);
     }
 
