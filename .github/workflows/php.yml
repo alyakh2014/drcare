@@ -12,5 +12,5 @@ jobs:
       - uses: actions/checkout@v2
       # This step is running tests.
       - name: Run all tests
-        script: /var/www/u0441585/data/www/gift.all2you.ru/vendor/bin/codecept run
+        run: /var/www/u0441585/data/www/gift.all2you.ru/vendor/bin/codecept run
         
