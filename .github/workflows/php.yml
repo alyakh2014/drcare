@@ -11,5 +11,5 @@ jobs:
     steps:
       # This step is running tests.
       - name: Run all tests
-        run: vendor/bin/codecept run
+        script: /var/www/u0441585/data/www/gift.all2you.ru/vendor/bin/codecept run
         
