@@ -3,5 +3,5 @@
 # #This is a script that greets the world
 # Usage: ./hello
 clear
-./vendor/codeception/codeception/codecept run
+./vendor/bin/codecept run
 exit 0
