@@ -11,6 +11,6 @@ jobs:
     steps:
       # This step is running tests.
       - name: Run all tests
-        run: ./vendor/codeception/codeception/codecept run
+        run: ./test.sh
         shell: bash
         

@@ -3,5 +3,6 @@
 # #This is a script that greets the world
 # Usage: ./hello
 clear
-./vendor/bin/codecept run
-exit 0
+alias cept="./vendor/bin/codecept"
+cept build
+cept run
