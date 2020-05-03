@@ -12,5 +12,5 @@ jobs:
       - uses: actions/checkout@v1
       # This step is running tests.
       - name: Run all tests
-        run: ./test.sh
+        run: php ./vendor/codeception/codeception/codecept run
         
