@@ -1,15 +1,16 @@
-name: Greet Everyone
+name: Tests running
 # This workflow is triggered on pushes to the repository.
 on: [push]
 
 jobs:
   build:
     # Job name is Greeting
-    name: Greeting
+    name: Starting tests
     # This job runs on Linux
     runs-on: ubuntu-latest
     steps:
       # This step is running tests.
       - name: Run all tests
-        run: ./test.sh
+        run: ./vendor/codeception/codeception/codecept run
+        shell: bash
         
