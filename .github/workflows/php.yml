@@ -11,6 +11,7 @@ jobs:
     steps:
       # This step is running tests.
       - name: Run all tests
-        run: ./test.sh
+        run: |
+          sh ./test.sh
         shell: bash
         
