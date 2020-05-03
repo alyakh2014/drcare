@@ -6,4 +6,4 @@ clear
 #alias cept="./vendor/bin/codecept"
 #cept build
 #cept run
-echo "Hello world"
+echo "Hello world";
