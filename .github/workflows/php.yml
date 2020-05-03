@@ -11,7 +11,5 @@ jobs:
     steps:
       # This step is running tests.
       - name: Run all tests
-        run: |
-          chmod +x ./test.sh
-          sh ./test.sh
+        run: ./test.sh
         
