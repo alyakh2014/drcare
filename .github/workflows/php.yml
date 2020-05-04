@@ -8,9 +8,9 @@ jobs:
     name: Starting tests
     # This job runs on Linux
     runs-on: ubuntu-latest
-      - uses: actions/checkout@v2
     steps:
       # This step is running tests.
+      - uses: actions/checkout@v2
       - name: Run all tests
         run: |
           chmod +x ./test.sh
