@@ -3,7 +3,4 @@
 # #This is a script that greets the world
 # Usage: ./hello
 #clear
-#alias cept="./vendor/bin/codecept"
-#cept build
-#cept run
-echo "Hello world";
+php ./vendor/bin/codecept run
