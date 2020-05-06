@@ -11,6 +11,10 @@ jobs:
     steps:
       # This step is running tests.
       - uses: actions/checkout@v2
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
       - name: Run all tests
         run: |
           chmod +x ./test.sh
