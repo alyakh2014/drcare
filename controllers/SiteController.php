@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 
+use app\modules\admin\models\News;
 use app\modules\admin\models\ServicesCategory;
 use app\models\SubscribeForm;
 use app\modules\admin\models\Services;
@@ -139,7 +140,11 @@ class SiteController extends Controller
     public function actionServices()
     {
 
-        $provider = Services::find()->with('services_category')->all();
+        $categoryId = (Yii::$app->request->get('type'));
+        if($categoryId){
+            $provider = Services::find()->with('services_category')->where('category_id='.$categoryId)->orderBy('name')->all();
+        }else $provider = Services::find()->with('services_category')->orderBy('name')->all();
+
         $services = new ArrayDataProvider([
             'allModels' => $provider,
             'pagination' => [
@@ -156,17 +161,19 @@ class SiteController extends Controller
 
     public function actionNews()
     {
-       $client = new Client();
-       $data = [];
-/*       $response = $client->createRequest()
-            ->setMethod('post')
-            ->setFormat(Client::FORMAT_JSON)
-            ->addHeaders(['Content-Type'=> 'application/json'])
-            ->setUrl(\Yii::$app->params['api']['host'])
-            ->send($data);
+        $provider = News::find()->with('category')->orderBy('data_create')->all();
 
-       $res = json_decode($response->getContent(), true);*/
-       return $this->render('news', compact('data'));
+        $news = new ArrayDataProvider([
+            'allModels' => $provider,
+            'pagination' => [
+                'pageSize' => 2,
+            ],
+            'sort' => [
+                'attributes' => ['id', 'title'],
+            ],
+        ]);
+
+       return $this->render('news', compact('news'));
     }
 
     public function actionSubscribe(){

@@ -66,7 +66,7 @@
             $target.fadeIn("slow");
         });
 
-        $('.tab-nav:first-child').trigger('click');
+        //$('.tab-nav:first-child').trigger('click');
     });
 
     // Circular Progress Bar

@@ -1,5 +1,7 @@
 <?php
 
+use app\modules\admin\models\User;
+
 class LoginFormCest
 {
     public function _before(\FunctionalTester $I)
@@ -23,7 +25,7 @@ class LoginFormCest
 //    // demonstrates `amLoggedInAs` method
     public function internalLoginByInstance(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(\app\models\User::findByUsername('admin'));
+        $I->amLoggedInAs(User::findByUsername('admin'));
         $I->amOnPage('/');
         $I->see('admin(Выход)');
    }

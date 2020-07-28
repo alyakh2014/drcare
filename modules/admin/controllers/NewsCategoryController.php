@@ -19,7 +19,7 @@ class NewsCategoryController extends Controller
      */
     public function behaviors()
     {
-        return [
+        $array = [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -27,6 +27,8 @@ class NewsCategoryController extends Controller
                 ],
             ],
         ];
+
+        return array_merge_recursive(parent::behaviors(), $array);
     }
 
     /**

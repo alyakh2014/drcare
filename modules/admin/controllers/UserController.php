@@ -2,24 +2,25 @@
 
 namespace app\modules\admin\controllers;
 
-use Yii;
 use app\modules\admin\models\User;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller
+class UserController extends DefaultController
 {
     /**
      * {@inheritdoc}
      */
     public function behaviors()
     {
-        return [
+        $array =  [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -27,6 +28,8 @@ class UserController extends Controller
                 ],
             ],
         ];
+
+        return array_merge_recursive(parent::behaviors(), $array);
     }
 
     /**
@@ -66,12 +69,18 @@ class UserController extends Controller
     {
         $model = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if($model->load(Yii::$app->request->post())){
+            $model->password = Yii::$app->security->generatePasswordHash(Yii::$app->request->post()["User"]["password"]);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
 
         return $this->render('create', [
             'model' => $model,
+            'create' => true
         ]);
     }
 
@@ -85,13 +94,20 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())){
+            if($model->save()) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                $model->image = UploadedFile::getInstance($model, 'image');
+                if ($model->image && !$model->image->hasError) {
+                    $model->upload();
+                }
+                Yii::$app->session->setFlash("success", "Данные пользователя успешно обновлены");
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 

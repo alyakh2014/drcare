@@ -1,13 +1,17 @@
 <?php
+
+use app\modules\admin\models\User;
 use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+$user_identity = Yii::$app->getUser()->getIdentity();
+$user_img = $user_identity->getImage()->getUrl();
 ?>
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini"></span><span class="logo-lg">' . Yii::$app->request->hostName. '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -229,17 +233,17 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="<?=$user_img?>"  alt="<?=User::findIdentity($user_identity->getId())->username?>" style="height: 25px; width: auto;"/>
+                        <span class="hidden-xs"><?=User::findIdentity($user_identity->getId())->username?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/>
+                            <img src="<?=$user_img?>" class="img-circle" style="height: 90px; width: auto;"
+                                 alt="<?=User::findIdentity($user_identity->getId())->username?>"/>
 
                             <p>
-                                Alexander Pierce - Web Developer
+                                <?=User::findIdentity($user_identity->getId())->username;?> - Web Developer
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>

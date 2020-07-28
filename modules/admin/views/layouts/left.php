@@ -1,7 +1,8 @@
 <?php
 
+use app\modules\admin\models\User;
 use yii\helpers\Html;
-
+$user = User::findIdentity(Yii::$app->getUser()->getIdentity()->getId());
 ?>
 <aside class="main-sidebar">
 
@@ -10,10 +11,10 @@ use yii\helpers\Html;
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="<?=Yii::$app->getUser()->getIdentity()->getImage()->getUrl()?>" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p><?=Yii::$app->getUser()->getIdentity()->getId()?></p>
+                <p><?=$user->username?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -35,11 +36,18 @@ use yii\helpers\Html;
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-//                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-//                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-                    ['label' => 'Услуги', 'icon' => 'shopping-cart', 'url' => ['/admin/services/']],
-                    ['label' => 'Категории услуг', 'icon' => 'object-group', 'url' => ['/admin/services-category/']],
+                    ['label' => 'Меню услуг', 'icon' => 'shopping-cart', 'url' => ['#'],
+                        'items'=>[
+                                ['label' => 'Категории услуг', 'icon' => '', 'url' => ['/admin/services-category/']],
+                                ['label' => 'Услуги', 'icon' => '', 'url' => ['/admin/services/']]
+                            ]
+                    ],
+                    ['label' => 'Меню новостей', 'icon' => 'newspaper-o', 'url' => ['#'],
+                        'items'=>[
+                            ['label' => 'Категории новостей', 'icon' => '', 'url' => ['/admin/news-category/']],
+                            ['label' => 'Новости', 'icon' => '', 'url' => ['/admin/news/']]
+                        ]
+                    ],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/admin/user/']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 //                    [

@@ -1,5 +1,7 @@
 <?php
 
+use app\modules\admin\models\NewsCategory;
+use app\modules\admin\models\User;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -20,13 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
             'title',
             'preview_text:html',
-            'detail_text:html',
-            'category_id',
             'data_create',
-            'author',
             'active',
             ['class' => 'yii\grid\ActionColumn'],
         ],

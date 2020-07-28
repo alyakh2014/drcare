@@ -12,14 +12,14 @@ use yii\filters\VerbFilter;
 /**
  * ServicesCategoryController implements the CRUD actions for ServicesCategory model.
  */
-class ServicesCategoryController extends AdminController
+class ServicesCategoryController extends DefaultController
 {
     /**
      * {@inheritdoc}
      */
     public function behaviors()
     {
-        return [
+        $array =  [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -27,6 +27,8 @@ class ServicesCategoryController extends AdminController
                 ],
             ],
         ];
+
+        return array_merge_recursive(parent::behaviors(), $array);
     }
 
     /**

@@ -22,7 +22,7 @@ class NewsController extends Controller
      */
     public function behaviors()
     {
-        return [
+        $array =  [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -30,6 +30,8 @@ class NewsController extends Controller
                 ],
             ],
         ];
+
+        return array_merge_recursive(parent::behaviors(), $array);
     }
 
     /**
@@ -75,13 +77,6 @@ class NewsController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-        //Get all category
-        $categories = NewsCategory::find()->all();
-        foreach ($categories as $item) {
-            $category[$item->id] = $item->title;
-        }
-        $model->category_id = $category;
-
         //Get current user
         $model->author = [Yii::$app->getUser()->getIdentity()->getId()=>User::findIdentity(Yii::$app->getUser()->getIdentity()->getId())->username];
         return $this->render('create', [

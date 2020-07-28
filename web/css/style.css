@@ -425,7 +425,7 @@ ul.tabs-nav .tab-nav {
     padding: 12px 24px;
     margin-right: 6px;
     margin-bottom: 10px;
-    background: #eaf1f3;
+    /*background: #eaf1f3;*/
     font-size: 16px;
     font-weight: 600;
     color: #404040;
@@ -1284,6 +1284,10 @@ ul.tabs-nav .tab-nav.active {
     text-decoration: none;
 }
 
+#services-list .pagination li.prev.disabled{
+    margin-right: 16px!important;
+}
+
 .pagination a:hover,
 .pagination .active a {
     color: #18a3eb;
@@ -1565,7 +1569,7 @@ ul.tabs-nav .tab-nav.active {
 }
 
 #services-list .services-list__item{
-    text-align: center!important;
+   /* text-align: center!important;*/
     padding:1px;
     border: 1px solid white;
     background: #f0f4f8;
@@ -1582,9 +1586,8 @@ ul.tabs-nav .tab-nav.active {
     height: 40px;
 }
 
-.services-list__categories{
-    align-items: center;
-    justify-content: center;
+ul.tabs-nav.services-list__categories{
+    justify-content: space-between!important;
 }
 
 

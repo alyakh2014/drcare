@@ -35,7 +35,11 @@ mihaildev\elfinder\Assets::noConflict($this);
         ]
     ) ?>
 
-    <?= $form->field($model, 'data_create')->textInput(['value'=> date('Y-m-d H:i:s'), 'readonly'=>true]) ?>
+    <?if(isset($create) && $create):?>
+        <?= $form->field($model, 'data_create')->textInput(['value'=> date('Y-m-d H:i:s'), 'readonly'=>true]) ?>
+    <?else:?>
+        <?= $form->field($model, 'data_create')->textInput(['value'=> $model->data_create, 'readonly'=>true]) ?>
+    <?endif?>
 
     <?if(isset($create) && $create):?>
         <?= $form->field($model, 'author')->dropDownList($model->author) ?>
